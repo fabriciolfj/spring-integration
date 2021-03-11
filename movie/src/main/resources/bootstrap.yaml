@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: movies
+  cloud:
+    config:
+      uri: http://localhost:8888
+  jmx:
+    enabled: true
+
+eureka:
+  client:
+    serviceUrl.defaultZone: http://localhost:8761/eureka

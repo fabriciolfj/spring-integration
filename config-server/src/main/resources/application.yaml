@@ -1,0 +1,15 @@
+
+server.port: 8888
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          default-label: main
+          uri: https://github.com/fabriciolfj/spring-cloud-config-v2
+
+eureka:
+  client:
+    serviceUrl.defaultZone: http://localhost:8761/eureka
