@@ -7,8 +7,15 @@ spring:
     config:
       server:
         git:
+          clone-on-start: true
           default-label: main
           uri: https://github.com/fabriciolfj/spring-cloud-config-v2
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 eureka:
   client:
