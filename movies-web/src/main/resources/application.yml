@@ -1,0 +1,10 @@
+
+server:
+  port: 8181
+spring:
+  application: movie-web
+  h2:
+    console:
+      enabled: true
+movie-web:
+  path: /v1/movie
