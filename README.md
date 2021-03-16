@@ -38,3 +38,12 @@ public interface MovieGenre {
 
 }
 ```
+
+### Versão 3
+- Uma das principais adições, é a capacidade de usar funções para produzir ou consumir mensagens.
+- Não precisamos adicionar qualquer anotação extra como @EnabledBinding ou @StreamListener.
+- Tipos de contexto:
+  -  supplier: seria o source
+  -  function: seria o processor
+  -  consumer: seria o sink
+- Possibilidade de usar programação reactive.
