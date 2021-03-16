@@ -1,1 +1,49 @@
 # spring-integration
+
+### Spring cloud stream
+- Defina o nome dos grupos de consumidos, pois isso deixa as mensagnes duraveis (caso não defina, spring cria um grupo anonima mensagem não durável, ou seja, caso o grupo de consumidos esteja fora, ao subir não háverá mensagens).
+
+#### Tipos de canais
+- Source: origem, saida
+- Sink: destino, entrada
+- Processor: processador, precisa de uma entrada e saida. Exemplo
+```
+@EnableBinding(Processor.class)
+public class MovieStream {
+
+    @StreamListener(Processor.INPUT)
+    @SendTo(Processor.OUTPUT)
+    public Movie process(Movie movie) {
+        movie.setTitle(movie.getTitle().toUpperCase());
+        return movie;
+    }
+}
+
+
+```
+
+### Convenções
+- Para configurar, segue o seguinte padrão:
+```
+spring.cloud.stream.bindings.[channel-name].destination=[new-channel-name]
+
+o codigo configurado abaixo, produzirá a configuração em seguida:
+
+spring.cloud.stream.bindings.new-movie.destination=new-movie-event
+
+public interface MovieGenre {
+    
+    @Input("new-movie")
+    SubscribableChannel movie();
+
+}
+```
+
+### Versão 3
+- Uma das principais adições, é a capacidade de usar funções para produzir ou consumir mensagens.
+- Não precisamos adicionar qualquer anotação extra como @EnabledBinding ou @StreamListener.
+- Tipos de contexto:
+  -  supplier: seria o source
+  -  function: seria o processor
+  -  consumer: seria o sink
+- Possibilidade de usar programação reactive.
