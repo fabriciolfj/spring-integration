@@ -47,3 +47,19 @@ public interface MovieGenre {
   -  function: seria o processor
   -  consumer: seria o sink
 - Possibilidade de usar programação reactive.
+
+#### Convernsão de nomes
+- Para vinculação de entrada:
+```
+spring.cloud.stream.binding.<nome da funcao>+in+<index>
+```
+- Para vinculação de saida
+```
+spring.cloud.stream.binding.<nome da funcao>+out+<index>
+
+spring.cloud.stream.bindings.uppercase-in-0.destination=uppercase
+spring.cloud.stream.bindings.uppercase-out-0.destination=log
+```
+- Indice sempre começa com 0, o que tem a ver com as funções com múltiplos argumentos de entrada e saída.
+
+
