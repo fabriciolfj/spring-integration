@@ -30,7 +30,7 @@ public class MovieIntegrationConfiguration {
         return IntegrationFlows.from(Files.inboundAdapter(new File(this.movieProperties.getDirectory()))
                 .preventDuplicates(true)
                 .patternFilter(this.movieProperties.getFilePattern()),
-                e -> e.poller(Pollers.fixedDelay(this.movieProperties.getFixedDelay())))
+                e -> e.poller(Pollers.fixedDelay(this.movieProperties.getFixedDelay()))) //vou revisitar em x segundos
                .split(Files.splitter().markers()) //dividi o arquivo em linhas e marca Start e end (no inico e fim do arquivo)
                .filter(p -> !(p instanceof FileSplitter.FileMarker)) //verificar se são linhas e nao os marcadores Start  e end00000000000000,
                .transform(Transformers.converter(this.movieConverter))
