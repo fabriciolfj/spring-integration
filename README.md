@@ -21,3 +21,20 @@ public class MovieStream {
 
 
 ```
+
+### Convenções
+- Para configurar, segue o seguinte padrão:
+```
+spring.cloud.stream.bindings.[channel-name].destination=[new-channel-name]
+
+o codigo configurado abaixo, produzirá a configuração em seguida:
+
+spring.cloud.stream.bindings.new-movie.destination=new-movie-event
+
+public interface MovieGenre {
+    
+    @Input("new-movie")
+    SubscribableChannel movie();
+
+}
+```
