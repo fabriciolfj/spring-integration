@@ -21,7 +21,7 @@ public class MovieController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void toMovieBingind(@RequestBody Movie movie) {
         var msg = MessageBuilder.withPayload(movie)
-                .setHeader("tipo", "drama")
+                .setHeader("tipo", movie.getGenre())
                 .build();
         streamBridge.send("movie-out-0", msg);
         movie.setTitle("teste");

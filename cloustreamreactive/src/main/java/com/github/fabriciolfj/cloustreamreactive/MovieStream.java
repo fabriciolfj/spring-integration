@@ -14,7 +14,7 @@ import java.util.function.Function;
 @Configuration
 public class MovieStream {
 
-    /*String GENRE = "teste";
+    String GENRE = "teste";
 
     @Bean
     public Function<Tuple2<Flux<Movie>, Flux<Movie>>, Flux<Movie>> onlyGenreTest() {
@@ -33,5 +33,5 @@ public class MovieStream {
             movie.setTitle(movie.getTitle().toUpperCase());
             return movie;
         });
-    }*/
+    }
 }
