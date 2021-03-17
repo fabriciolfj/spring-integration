@@ -97,3 +97,11 @@ spring.cloud.stream.bindings.titleUpperCase-out-0.destination=log
         });
     }
 ```
+
+#### Rotas
+- Podemos direcionar para funções, com base em alguns critérios, como valor de uma propriedade no header.
+- Devemos habilitar a configuração abaixo e automaticamente o sistema criará os bindings functionRouter-in-0 e funcitonRouter-out-0.
+```
+spring.cloud.stream.function.routing.enabled=true
+spring.cloud.function.routing-expression=headers['genre']
+```
