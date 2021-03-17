@@ -62,4 +62,14 @@ spring.cloud.stream.bindings.uppercase-out-0.destination=log
 ```
 - Indice sempre começa com 0, o que tem a ver com as funções com múltiplos argumentos de entrada e saída.
 
+- Exemplo de configuração utilizando diversas functions:
+```
+spring.cloud.stream.bindings.movie-out-0.destination=movie
 
+spring.cloud.function.definition=onlyGenreTest;titleUpperCase
+spring.cloud.stream.bindings.onlyGenreTest-in-0.destination=movie
+spring.cloud.stream.bindings.onlyGenreTest-out-0.destination=titleUpperCase
+spring.cloud.stream.bindings.titleUpperCase-in-0.destination=titleUpperCase
+spring.cloud.stream.bindings.titleUpperCase-out-0.destination=log
+
+```
