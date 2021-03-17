@@ -65,11 +65,35 @@ spring.cloud.stream.bindings.uppercase-out-0.destination=log
 - Exemplo de configuração utilizando diversas functions:
 ```
 spring.cloud.stream.bindings.movie-out-0.destination=movie
+spring.cloud.stream.bindings.movie-out-1.destination=movie2
 
 spring.cloud.function.definition=onlyGenreTest;titleUpperCase
 spring.cloud.stream.bindings.onlyGenreTest-in-0.destination=movie
+spring.cloud.stream.bindings.onlyGenreTest-in-1.destination=movie2
 spring.cloud.stream.bindings.onlyGenreTest-out-0.destination=titleUpperCase
 spring.cloud.stream.bindings.titleUpperCase-in-0.destination=titleUpperCase
 spring.cloud.stream.bindings.titleUpperCase-out-0.destination=log
 
+```
+- Exemplo de funções com base na configuração acima: (obs os índices).
+
+```
+    @Bean
+    public Function<Tuple2<Flux<Movie>, Flux<Movie>>, Flux<Movie>> onlyGenreTest() {
+        return flux ->
+            flux.getT1().filter(movie -> {
+                log.info("Valor tipo 2: {}", flux.getT2().blockFirst().toString());
+                log.info("Filter: {}", movie);
+                return movie.getGenre().equalsIgnoreCase(GENRE);
+            });
+    }
+
+    @Bean
+    public Function<Flux<Movie>, Flux<Movie>> titleUpperCase() {
+        return movieFlux -> movieFlux.map(movie -> {
+            log.info("Uppercase: {}", movie);
+            movie.setTitle(movie.getTitle().toUpperCase());
+            return movie;
+        });
+    }
 ```
