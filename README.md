@@ -131,4 +131,8 @@ stream list
 
 stream info --name simple
 
+//subir os streams
+stream deploy --name simple
+
+
 ```
