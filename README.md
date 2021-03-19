@@ -136,3 +136,9 @@ stream deploy --name simple
 
 
 ```
+
+## Skipper server
+- Server para atualizar as aplicações
+- Registrar os historicos de deploy
+- efetuar deploy
+- rollbacks de apps.
