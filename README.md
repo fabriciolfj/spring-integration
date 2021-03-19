@@ -105,3 +105,6 @@ spring.cloud.stream.bindings.titleUpperCase-out-0.destination=log
 spring.cloud.stream.function.routing.enabled=true
 spring.cloud.function.routing-expression=headers['genre']
 ```
+## Spring cloud data flow
+- É uma tecnologia de código aberto que compõe topologias complexas para pipelines de dados de streaming e lote.
+- Utiliza-se microservices pré construídos e permite faz a integração entre eles.
