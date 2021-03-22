@@ -147,4 +147,6 @@ stream deploy --name simple
 - Segue abaixo uma forma de criar uma pippeline usando cloud stream (obs: cada etapa é uma aplicação):
 ```
 movie = http | splitter | groovy-transform | jdbc
+
+aplicativo http, envie mensagem para aplicativo splitter, que envia mensagem para o aplicativo groovy transform que envia ao aplicativo jdbc salvar na base.
 ```
