@@ -142,3 +142,9 @@ stream deploy --name simple
 - Registrar os historicos de deploy
 - efetuar deploy
 - rollbacks de apps.
+
+## Criando uma pipeline
+- Segue abaixo uma forma de criar uma pippeline usando cloud stream (obs: cada etapa é uma aplicação):
+```
+movie = http | splitter | groovy-transform | jdbc
+```
