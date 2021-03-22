@@ -148,5 +148,7 @@ stream deploy --name simple
 ```
 movie = http | splitter | groovy-transform | jdbc
 
+movie = , seria uma variável ou nome da dsl.
+
 aplicativo http, envie mensagem para aplicativo splitter, que envia mensagem para o aplicativo groovy transform que envia ao aplicativo jdbc salvar na base.
 ```
