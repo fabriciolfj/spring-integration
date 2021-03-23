@@ -105,3 +105,53 @@ spring.cloud.stream.bindings.titleUpperCase-out-0.destination=log
 spring.cloud.stream.function.routing.enabled=true
 spring.cloud.function.routing-expression=headers['genre']
 ```
+## Spring cloud data flow
+- É uma tecnologia de código aberto que compõe topologias complexas para pipelines de dados de streaming e lote.
+- Utiliza-se microservices pré construídos e permite faz a integração entre eles.
+- Um orchestrator de spring cloud stream
+- Cria-se aplicativos com base no spring cloud stream por ele
+- Em um ambiente kubernetes, ele cria um pod para cada cloud stream.
+
+#### Comandos via shell
+```
+wget https://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-shell/2.4.2.RELEASE/spring-cloud-dataflow-shell-2.4.2.RELEASE.jar 
+
+java -jar spring-cloud-dataflow-shell-2.4.2.RELEASE.jar
+
+dataflow config server --uri http://192.168.64.6:30724
+
+app list
+
+// importar rabbitmq ou kafka
+app import --uri https://dataflow.spring.io/rabbitmq-docker-latest
+
+stream create --name simple --definition "time | log"
+
+stream list
+
+stream info --name simple
+
+//subir os streams
+stream deploy --name simple
+
+
+```
+
+## Skipper server
+- Server para atualizar as aplicações
+- Registrar os historicos de deploy
+- efetuar deploy
+- rollbacks de apps.
+
+## Criando uma pipeline
+- Segue abaixo uma forma de criar uma pippeline usando cloud stream (obs: cada etapa é uma aplicação):
+```
+movie = http | splitter | groovy-transform | jdbc > log
+imdb = :movie.groovy-transform > filter
+
+movie = , seria uma variável ou nome da dsl.
+
+aplicativo http, envie mensagem para aplicativo splitter, que envia mensagem para o aplicativo groovy transform que envia ao aplicativo jdbc salvar na base, e redirecionando uma cópia da mensagem para o aplicativo de log.
+
+imbd, ficará ouvindo até a etapa do movie.groovy-transform e quando chegar nessa etapa, receberá uma cópia da mensagem (resultado do processamento de groovy-transform) e encaminhará para aplicação filter.
+```
