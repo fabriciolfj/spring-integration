@@ -1,0 +1,19 @@
+// dataflow 1.2.0.RELEASE log opened at 2021-03-22 21:18:01
+dataflow config server --uri http://10.27.29.30:31499
+dataflow config server --uri http://10.27.28.30:31499
+dataflow config server --uri http://10.27.28.20:31499
+app import --uri https://dataflow.spring.io/rabbitmq-maven-latest
+app list
+stream list
+// dataflow 1.2.0.RELEASE log opened at 2021-03-22 21:27:23
+dataflow config server --uri http://10.27.28.20:31499
+// dataflow 1.2.0.RELEASE log opened at 2021-03-22 21:29:48
+dataflow config server --uri http://localhost:9393
+app import --uri https://dataflow.spring.io/rabbitmq-maven-latest
+// [failed] stream create --name movie --definition "http --port=9001 | splitter --expression=#jsonPath(payload,'$.movies')| groovy-transform --script=https://raw.githubusercontent.com/fabriciolfj/movie-stream/main/movie-transform.groovy | jdbc --columns=id:id,title:title,actor:actor,year:year,genre:genre,stars:stars,rating:imdb.rating,ratingcount:imdb.ratingCount --table-name=movies --password=rootpw --driver-class-name=org.mariadb.jdbc.Driver --username=root --url=jdbc:mysql://mysql:3306/reviews?autoReconnect=true&useSSL=false"
+app list
+// [failed] stream create --name movie --definition "http --port=9001 | splitter --expression=#jsonPath(payload,'$.movies')| groovy-transform --script=https://raw.githubusercontent.com/fabriciolfj/movie-stream/main/movie-transform.groovy | jdbc --columns=id:id,title:title,actor:actor,year:year,genre:genre,stars:stars,rating:imdb.rating,ratingcount:imdb.ratingCount --table-name=movies --password=rootpw --driver-class-name=org.mariadb.jdbc.Driver --username=root --url=jdbc:mysql://mysql:3306/reviews?autoReconnect=true&useSSL=false"
+stream create --name movie --definition "http --port=9001 | splitter --expression=#jsonPath(payload,'$.movies')| groovy-transform --script=https://raw.githubusercontent.com/fabriciolfj/movie-stream/main/movie-transform.groovy | jdbc --columns=id:id,title:title,actor:actor,year:year,genre:genre,stars:stars,rating:imdb.rating,ratingcount:imdb.ratingCount --table-name=movies --password=rootpw --driver-class-name=org.mariadb.jdbc.Driver --username=root --url=jdbc:mysql://mysql:3306/reviews?autoReconnect=true&useSSL=false"
+stream create --name stars --definition ":movie.splitter > filter --expression=\"#jsonPath(payload,'$.stars')>3\" | log"
+stream create --name imdb-high-rating --definition ":movie.groovy-transform > filter --expression=\"#jsonPath(payload,'$.imdb.rating') > 8.0\" | log"
+// [failed] stream deploy --name movie

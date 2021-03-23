@@ -19,7 +19,8 @@ public class MovieStream {
     @Bean
     public Function<Tuple2<Flux<Movie>, Flux<Movie>>, Flux<Movie>> onlyGenreTest() {
         return flux ->
-            flux.getT1().filter(movie -> {
+            flux.getT1()
+                    .filter(movie -> {
                 log.info("Valor tipo 2: {}", flux.getT2().blockFirst().toString());
                 log.info("Filter: {}", movie);
                 return movie.getGenre().equalsIgnoreCase(GENRE);

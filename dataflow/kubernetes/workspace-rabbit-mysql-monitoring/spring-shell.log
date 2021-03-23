@@ -1,0 +1,41 @@
+// dataflow 1.2.0.RELEASE log opened at 2021-03-19 11:32:11
+dataflow config server --uri http://10.27.28.20:31217
+dataflow config server --uri http://10.27.28.20:30818
+app list
+// [failed] stream create --name simple --definition "time | log"
+// [failed] stream create --name simple --definition "time | log"
+// [failed] stream create --name simple --definition "time | log"
+// [failed] stream create --name simple --definition "time | log"
+app import --uri https://dataflow.spring.io/rabbitmq-docker-latest
+stream create --name simple --definition "time | log"
+stream list
+stream info --name simple
+stream list
+stream deploy --name simple
+exit
+// dataflow 1.2.0.RELEASE log closed at 2021-03-19 12:10:53
+// dataflow 1.2.0.RELEASE log opened at 2021-03-19 12:29:59
+dataflow config server --uri http://10.27.28.20:30396
+app import --uri https://dataflow.spring.io/rabbitmq-docker-latest
+stream create --name simple --definition "time | log"
+// [failed] stream deploy --name simple
+stream list
+// [failed] stream deploy --name simple
+app import --uri https://dataflow.spring.io/rabbitmq-docker-latest
+// [failed] stream deploy --name simple
+exit
+// dataflow 1.2.0.RELEASE log closed at 2021-03-19 12:33:31
+// dataflow 1.2.0.RELEASE log opened at 2021-03-19 12:37:47
+dataflow config server --uri http://10.27.28.20:30821
+app import --uri https://dataflow.spring.io/rabbitmq-docker-latest
+stream create --name simple --definition "time | log"
+// [failed] stream deploy --name simple
+// [failed] stream deploy --name simple
+// [failed] stream deploy --name simple
+// [failed] stream create --name simple --definition "time | log"
+stream list
+clear
+// [failed] stream deploy --name simple
+stream deploy --name simple
+exit
+// dataflow 1.2.0.RELEASE log closed at 2021-03-19 12:41:20

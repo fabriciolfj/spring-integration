@@ -1,0 +1,10 @@
+app import --uri https://dataflow.spring.io/rabbitmq-maven-latest
+add aplicacao: 	maven://org.springframework.cloud.stream.app:groovy-transform-app-dependencies:2.1.4.RELEASE
+
+stream create --name movie --definition "http --port=9001 | splitter --expression=#jsonPath(payload,'$.movies') --script=https://raw.githubusercontent.com/fabriciolfj/movie-stream/main/movie-transform.groovy | jdbc --columns=id:id,title:title,actor:actor,year:year,genre:genre,stars:stars,rating:imdb.rating,ratingcount:imdb.ratingCount --table-name=movies --password=rootpw --driver-class-name=org.mariadb.jdbc.Driver --username=root --url=jdbc:mysql://mysql:3306/reviews?autoReconnect=true&useSSL=false"
+
+stream create --name stars --definition ":movie.splitter > filter --expression=\"#jsonPath(payload,'$.stars')>3\" | log"
+
+dataflow:> stream create --name imdb-high-rating --definition ":movie.groovy-transform > filter --expression=\"#jsonPath(payload,'$.imdb.rating') > 8.0\" | log"
+
+dataflow:> stream list"
