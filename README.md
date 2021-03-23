@@ -111,6 +111,7 @@ spring.cloud.function.routing-expression=headers['genre']
 - Um orchestrator de spring cloud stream
 - Cria-se aplicativos com base no spring cloud stream por ele
 - Em um ambiente kubernetes, ele cria um pod para cada cloud stream.
+- Em resumo, spring data flow orquestra vários aplicativos stream, criando, implantando, destruindo e integrando (criando fluxo, definindo qual aplicativo é a origem (source), que processa (proccess) e que recebe a mensagem (sink).
 
 #### Comandos via shell
 ```
