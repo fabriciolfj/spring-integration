@@ -156,3 +156,8 @@ aplicativo http, envie mensagem para aplicativo splitter, que envia mensagem par
 
 imbd, ficará ouvindo até a etapa do movie.groovy-transform e quando chegar nessa etapa, receberá uma cópia da mensagem (resultado do processamento de groovy-transform) e encaminhará para aplicação filter.
 ```
+
+#### Registrando aplicações
+```
+dataflow:>app register --name movie-imdb --type source --uri https://github.com/fabriciolfj/spring-data-flow/blob/main/movie-source-0.0.1.jar
+```
