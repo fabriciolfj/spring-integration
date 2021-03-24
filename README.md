@@ -111,6 +111,7 @@ spring.cloud.function.routing-expression=headers['genre']
 - Um orchestrator de spring cloud stream
 - Cria-se aplicativos com base no spring cloud stream por ele
 - Em um ambiente kubernetes, ele cria um pod para cada cloud stream.
+- Em resumo, spring data flow orquestra vários aplicativos stream, criando, implantando, destruindo e integrando (criando fluxo, definindo qual aplicativo é a origem (source), que processa (proccess) e que recebe a mensagem (sink).
 
 #### Comandos via shell
 ```
@@ -154,4 +155,31 @@ movie = , seria uma variável ou nome da dsl.
 aplicativo http, envie mensagem para aplicativo splitter, que envia mensagem para o aplicativo groovy transform que envia ao aplicativo jdbc salvar na base, e redirecionando uma cópia da mensagem para o aplicativo de log.
 
 imbd, ficará ouvindo até a etapa do movie.groovy-transform e quando chegar nessa etapa, receberá uma cópia da mensagem (resultado do processamento de groovy-transform) e encaminhará para aplicação filter.
+```
+
+#### Registrando aplicações
+```
+Jar no gihub
+dataflow:>app register --name movie-imdb --type source --uri https://github.com/fabriciolfj/spring-data-flow/blob/main/movie-source-0.0.1.jar
+
+Imagem docker
+docker://fabricio211/imagem:versao
+
+maven
+app register --name splitter --type processor --uri maven://org.springframework.cloud.stream.app:splitter-processor-rabbit:2.1.2.RELEASE --metadata-uri maven://org.springframework.cloud.stream.app:splitter-processor-rabbit:jar:metadata:2.1.2.RELEASE
+
+```
+
+- Podemos personalizar as configurações das aplicações, no momento do deploy, através da aba freetext
+```
+app.movie-processor.movie.header-key=e1d57bc780msh2ab0500b21047acp10b199jsnd21a2e07bb7e
+app.movie-processor.spring.cloud.stream.bindings.input.destination=imdb
+app.movie-processor.spring.cloud.stream.bindings.output.destination=log
+app.movie-sink.spring.cloud.stream.bindings.input.destination=log
+app.movie-source.server.port=8081
+app.movie-source.spring.cloud.stream.bindings.output.destination=movie
+app.splitter.expression=#jsonPath(payload,'$.MovieRequest.movies')
+app.splitter.spring.cloud.stream.bindings.input.destination=movie
+app.splitter.spring.cloud.stream.bindings.output.destination=imdb
+spring.cloud.dataflow.skipper.platformName=default
 ```
