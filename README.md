@@ -165,5 +165,7 @@ dataflow:>app register --name movie-imdb --type source --uri https://github.com/
 Imagem docker
 docker://fabricio211/imagem:versao
 
+maven
+app register --name splitter --type processor --uri maven://org.springframework.cloud.stream.app:splitter-processor-rabbit:2.1.2.RELEASE --metadata-uri maven://org.springframework.cloud.stream.app:splitter-processor-rabbit:jar:metadata:2.1.2.RELEASE
 
 ```
