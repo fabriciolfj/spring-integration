@@ -182,4 +182,14 @@ app.splitter.expression=#jsonPath(payload,'$.MovieRequest.movies')
 app.splitter.spring.cloud.stream.bindings.input.destination=movie
 app.splitter.spring.cloud.stream.bindings.output.destination=imdb
 spring.cloud.dataflow.skipper.platformName=default
+
+app.movie-processor.movie.header-key=e1d57bc780msh2ab0500b21047acp10b199jsnd21a2e07bb7e
+app.movie-processor.spring.cloud.stream.bindings.input.destination=movie
+app.movie-processor.spring.cloud.stream.bindings.output.destination=log
+app.movie-sink.spring.cloud.stream.bindings.input.destination=log
+app.movie-source.server.port=8080
+app.movie-processor.server.port=8080
+app.movie-sink.server.port=8080
+app.movie-source.spring.cloud.stream.bindings.output.destination=movie
+spring.cloud.dataflow.skipper.platformName=default
 ```
