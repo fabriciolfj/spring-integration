@@ -172,12 +172,12 @@ app register --name splitter --type processor --uri maven://org.springframework.
 
 - Podemos personalizar as configurações das aplicações, no momento do deploy, através da aba freetext
 ```
-app.movie-imdb.server.port=8081
-app.movie-imdb.spring.cloud.stream.bindings.output.destination=movie
-app.movie-log.spring.cloud.stream.bindings.input.destination=log
 app.movie-processor.movie.header-key=e1d57bc780msh2ab0500b21047acp10b199jsnd21a2e07bb7e
 app.movie-processor.spring.cloud.stream.bindings.input.destination=imdb
 app.movie-processor.spring.cloud.stream.bindings.output.destination=log
+app.movie-sink.spring.cloud.stream.bindings.input.destination=log
+app.movie-source.server.port=8081
+app.movie-source.spring.cloud.stream.bindings.output.destination=movie
 app.splitter.expression=#jsonPath(payload,'$.MovieRequest.movies')
 app.splitter.spring.cloud.stream.bindings.input.destination=movie
 app.splitter.spring.cloud.stream.bindings.output.destination=imdb
