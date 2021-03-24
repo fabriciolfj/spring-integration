@@ -159,5 +159,11 @@ imbd, ficará ouvindo até a etapa do movie.groovy-transform e quando chegar nes
 
 #### Registrando aplicações
 ```
+Jar no gihub
 dataflow:>app register --name movie-imdb --type source --uri https://github.com/fabriciolfj/spring-data-flow/blob/main/movie-source-0.0.1.jar
+
+Imagem docker
+docker://fabricio211/imagem:versao
+
+
 ```
